@@ -46,3 +46,103 @@ void clarear(int altura, int largura, unsigned char imagem_colorida[][500][3]){
 				imagem_colorida[i][j][k] = (unsigned char)valor;
 			}
 }
+
+void espelhar(int altura, int largura,  unsigned char imagem_colorida[][500][3]){
+	
+	unsigned char aux;
+	
+	for(int i=0; i < altura; i++)
+		for(int j=0, t=largura-1; j<(largura/2); j++, t--)
+			for(int k = 0; k<3;k++)	{ 
+				aux = imagem_colorida[i][j][k];
+				imagem_colorida[i][j][k] = imagem_colorida[i][t][k];
+				imagem_colorida[i][t][k] = aux;
+		}
+}
+
+void filtrosobel(int altura,int largura, unsigned char imagem_colorida[][500][3]){
+	int aux,somax, somay;
+	somax=0, somay=0;
+	unsigned char imagemCopia[altura][largura][3];
+	int Gx[3][3] = {{1,0,-1},{2,0,-2},{1,0,-1}},
+		Gy[3][3] = {{1,2,1},{0,0,0},{-1,-2,-1}};
+	
+	// ***CÓPIA DA MATRIZ IMAGEM ***//
+	for(int i=0; i < altura; i++)
+		for(int j=0; j < largura; j++)
+			for(int k=0; k <3; k++)
+				imagemCopia[i][j][k] = imagem_colorida[i][j][k];
+			
+			
+	for(int i=0; i < altura; i++)
+		for(int j=0; j < largura; j++)
+			for(int k=0; k<3;k++){
+			
+				if(i>0 && j > 0)			 	somax += Gx[0][0]*(int)imagemCopia[i-1][j-1][k];
+				if(i>0)						 	somax += Gx[0][1]*(int)imagemCopia[i-1][j][k];
+				if(i>0 && j<largura-1)			somax += Gx[0][2]*(int)imagemCopia[i-1][j+1][k];
+				if(j>0)						 	somax += Gx[1][0]*(int)imagemCopia[i][j-1][k];
+												somax += Gx[1][1]*(int)imagemCopia[i][j][k];
+				if(j<largura-1)				 	somax += Gx[1][2]*(int)imagemCopia[i][j+1][k];
+				if(i<altura-1 && j>0)		 	somax += Gx[2][0]*(int)imagemCopia[i+1][j-1][k];
+				if(i<altura-1)				 	somax += Gx[2][1]*(int)imagemCopia[i+1][j][k];
+				if(i<altura-1 && j<largura-1)	somax += Gx[2][2]*(int)imagemCopia[i+1][j+1][k];
+				
+				if(i>0 && j > 0)				somay += Gy[0][0]*(int)imagemCopia[i-1][j-1][k]; 
+				if(i>0)							somay += Gy[0][1]*(int)imagemCopia[i-1][j][k]; 
+				if(i>0 && j<largura-1)			somay += Gy[0][2]*(int)imagemCopia[i-1][j+1][k];
+				if(j>0)							somay += Gy[1][0]*(int)imagemCopia[i][j-1][k];
+												somay += Gy[1][1]*(int)imagemCopia[i][j][k];
+				if(j<largura-1)					somay += Gy[1][2]*(int)imagemCopia[i][j+1][k];
+				if(i<altura-1 && j>0)			somay += Gy[2][0]*(int)imagemCopia[i+1][j-1][k];
+				if(i<altura-1)					somay += Gy[2][1]*(int)imagemCopia[i+1][j][k];
+				if(i<altura-1 && j<largura-1)	somay += Gy[2][2]*(int)imagemCopia[i+1][j+1][k];
+				
+				int Gp = sqrt((somax*somax) + (somay*somay));
+				if(Gp > 255)
+					Gp = 255;
+				else if(Gp < 0)
+					Gp = 0;
+				
+				imagem_colorida[i][j][k] = (unsigned char)Gp;
+				somay = 0, somax = 0;
+			}		
+}
+
+void filtrogaussiano(int altura,int largura, unsigned char imagem_colorida[][500][3]){
+	int soma = 0;
+	unsigned char imagemCopia[altura][largura][3];
+	int matrizG[3][3] = {{1,2,1},{2,4,2},{1,2,1}};
+	
+	// ***CÓPIA DA MATRIZ IMAGEM ***//
+	for(int i=0; i < altura;i++)
+		for(int j=0; j < largura;j++)
+			for(int k=0; k<3;k++)
+				imagemCopia[i][j][k] = imagem_colorida[i][j][k];
+			
+			
+	for(int i=0; i < altura; i++)
+		for(int j=0; j < largura; j++)
+			for(int k=0;k<3;k++){
+				
+				if(i>0 && j > 0)			 	soma += matrizG[0][0]*(int)imagemCopia[i-1][j-1][k];
+				if(i>0)						 	soma += matrizG[0][1]*(int)imagemCopia[i-1][j][k];
+				if(i>0 && j<largura-1)			soma += matrizG[0][2]*(int)imagemCopia[i-1][j+1][k];
+				if(j>0)						 	soma += matrizG[1][0]*(int)imagemCopia[i][j-1][k];
+												soma += matrizG[1][1]*(int)imagemCopia[i][j][k];
+				if(j<largura-1)				 	soma += matrizG[1][2]*(int)imagemCopia[i][j+1][k];
+				if(i<altura-1 && j>0)		 	soma += matrizG[2][0]*(int)imagemCopia[i+1][j-1][k];
+				if(i<altura-1)				 	soma += matrizG[2][1]*(int)imagemCopia[i+1][j][k];
+				if(i<altura-1 && j<largura-1)	soma += matrizG[2][2]*(int)imagemCopia[i+1][j+1][k];
+				
+				
+				int novopixel = soma/16;
+				if(novopixel > 255)
+					novopixel = 255;
+				else if(novopixel < 0)
+					novopixel = 0;
+				
+				imagem_colorida[i][j][k] = (unsigned char)novopixel;
+				soma = 0;
+			}		
+}

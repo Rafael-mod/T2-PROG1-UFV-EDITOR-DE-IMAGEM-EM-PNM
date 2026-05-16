@@ -181,6 +181,15 @@ int main() {
 		else if(escolha == 3){
 			negativo(altura, largura,imagem_colorida);
 		}
+		else if(escolha == 4){
+			espelhar(altura,largura, imagem_colorida);
+		}
+		else if(escolha == 5){
+			filtrosobel(altura,largura,imagem_colorida);
+		}
+		else if(escolha == 6){
+			filtrogaussiano(altura,largura,imagem_colorida);
+		}
 	}
     //*************************//
 //*** FIM DO TRATAMENTO DA IMAGEM ***//
