@@ -5,3 +5,4 @@ void espelhar(int altura, int largura,  unsigned char imagem_colorida[][500][3])
 void filtrosobel(int altura,int largura, unsigned char imagem_colorida[][500][3]);
 void filtrogaussiano(int altura,int largura, unsigned char imagem_colorida[][500][3]);
 void mascaradenitidez(int altura,int largura, unsigned char imagem_colorida[][500][3]);
+void rgbtocinza(int altura, int largura, unsigned char imagem_colorida[][500][3], unsigned char imagem[][500]);

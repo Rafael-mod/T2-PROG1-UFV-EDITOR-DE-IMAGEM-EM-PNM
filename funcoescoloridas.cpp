@@ -176,3 +176,31 @@ void mascaradenitidez(int altura,int largura, unsigned char imagem_colorida[][50
 			}
 
 }
+
+void rgbtocinza(int altura, int largura, unsigned char imagem_colorida[][500][3], unsigned char imagem[][500]){
+	// vou utilizar a equação para monitores modernos que calcula a intensidade da luminosidade(para transformar o rgb em um pixel preto e cinza);
+	// Y = 0.2126*Red + 0.7152*Green + 0.0722*Blue
+	float somaY=0;
+	for(int i=0; i<altura; i++)
+		for(int j=0;j<largura;j++){
+			for(int k=0; k<3;k++){
+				if(k==0)
+					somaY += (float)imagem_colorida[i][j][k] * 0.2126;
+				else if(k==1)
+					somaY += (float)imagem_colorida[i][j][k] * 0.7152;
+				else
+					somaY += (float)imagem_colorida[i][j][k] * 0.0722;
+			}
+			
+			if(somaY > 255)
+				somaY = 255;
+			else if(somaY < 0)
+				somaY = 0;
+				
+			imagem[i][j] = (unsigned char)somaY;
+			somaY=0;	
+		}
+	
+	
+	
+}

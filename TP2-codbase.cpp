@@ -24,7 +24,7 @@ int main() {
 	unsigned char imagem_colorida[MAXALTURA][MAXLARGURA][3];	//a imagem colorida
 	int largura, altura;						//dimensoes da imagem
 	char tipo[4];								//tipo da imagem
-	string nome_imagem;							// nome da nova imagem
+	string nome_imagem, nome_entrada;							// nome da nova imagem
 	ifstream arqentrada;						//arquivo que contem a imagem original
 	ofstream arqsaida;							//arquivo que contera a imagem modificada
 	char comentario[200], c;				//auxiliares
@@ -36,7 +36,9 @@ int main() {
 //a diferenca e' que le do arquivo (arqentrada) em vez de ler com cin
 
 	//*** Abertura do arquivo ***//
-	arqentrada.open("imagem.pnm",ios::in); //Abre arquivo para leitura
+	cout << "Qual o nome da imagem?\n";
+	cin >> nome_entrada;
+	arqentrada.open( nome_entrada + ".pnm",ios::in); //Abre arquivo para leitura
 	if (!arqentrada) {
 		cout << "Nao consegui abrir arquivo imagem.pnm" << endl;
 		return 0;
@@ -171,6 +173,7 @@ int main() {
 		cout << "5 - Filtro de Sobel\n";
 		cout << "6 - Desfocagem Gaussiana\n";
 		cout << "7 - Mascara de nitidez\n";
+		cout << "8 - Colorida para tons de cinza\n";
 		cin >> escolha;
 		
 		if(escolha == 1){
@@ -193,6 +196,10 @@ int main() {
 		}
 		else if(escolha == 7){
 			mascaradenitidez(altura,largura,imagem_colorida);
+		}
+		else if(escolha == 8){
+			rgbtocinza(altura, largura, imagem_colorida, imagem);
+			strcpy(tipo, "P2");
 		}
 	}
     //*************************//
