@@ -170,6 +170,7 @@ int main() {
 		cout << "4 - Espelhar\n";
 		cout << "5 - Filtro de Sobel\n";
 		cout << "6 - Desfocagem Gaussiana\n";
+		cout << "7 - Mascara de nitidez\n";
 		cin >> escolha;
 		
 		if(escolha == 1){
@@ -189,6 +190,9 @@ int main() {
 		}
 		else if(escolha == 6){
 			filtrogaussiano(altura,largura,imagem_colorida);
+		}
+		else if(escolha == 7){
+			mascaradenitidez(altura,largura,imagem_colorida);
 		}
 	}
     //*************************//

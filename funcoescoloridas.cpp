@@ -146,3 +146,33 @@ void filtrogaussiano(int altura,int largura, unsigned char imagem_colorida[][500
 				soma = 0;
 			}		
 }
+
+
+void mascaradenitidez(int altura,int largura, unsigned char imagem_colorida[][500][3]){
+	float aux,fator;
+	cout << "Qual o fator de nitidez?(0.0 - 5.0)\n";
+	cin >> fator;
+	unsigned char imagemCopia[altura][500][3];
+		
+	// ***CÓPIA DA MATRIZ IMAGEM ***//
+	for(int i=0; i < altura; i++)
+		for(int j=0; j < largura; j++)
+			for(int k=0;k<3; k++)
+				imagemCopia[i][j][k] = imagem_colorida[i][j][k];
+			
+	filtrogaussiano(altura,largura, imagemCopia);
+		
+	for(int i =0;i< altura;i++)
+		for(int j=0;j<largura;j++)
+			for(int k=0;k<3;k++){
+				aux = (float)imagem_colorida[i][j][k] + (((float)imagem_colorida[i][j][k] - (float)imagemCopia[i][j][k])*fator);
+				
+				if(aux > 255)
+					aux = 255;
+				else if(aux < 0)
+					aux = 0;
+				
+				imagem_colorida[i][j][k] = (unsigned char)aux;
+			}
+
+}
