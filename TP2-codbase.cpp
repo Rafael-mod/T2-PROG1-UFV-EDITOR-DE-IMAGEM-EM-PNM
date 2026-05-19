@@ -14,14 +14,14 @@
 #include "funcoes.h"
 #include "funcoescoloridas.h"
 
-const int MAXALTURA  = 500;				//tamanho maximo aceito (pode ser alterado)
-const int MAXLARGURA = 500;
+unsigned char imagem[MAXALTURA][MAXLARGURA];
+unsigned char imagem_copia_2d[MAXALTURA][MAXLARGURA];
+unsigned char imagem_colorida[MAXALTURA][MAXLARGURA][3];
+unsigned char imagem_copia_3d[MAXALTURA][MAXLARGURA][3];
 
 using namespace std;
 
 int main() {
-	unsigned char imagem[MAXALTURA][MAXLARGURA]; //a imagem  em tons de cinza
-	unsigned char imagem_colorida[MAXALTURA][MAXLARGURA][3];	//a imagem colorida
 	int largura, altura;						//dimensoes da imagem
 	char tipo[4];								//tipo da imagem
 	string nome_imagem, nome_entrada;							// nome da nova imagem
@@ -31,9 +31,6 @@ int main() {
 	int i, j,k, valor, escolha;								//auxiliares
 
 //*** LEITURA DA IMAGEM ***//
-//esta parte le a imagem de um arquivo; voce pode deixar para olhar isso depois
-//e iniciar a olhar o codigo a partir da linha 75 que de fato le os dados;
-//a diferenca e' que le do arquivo (arqentrada) em vez de ler com cin
 
 	//*** Abertura do arquivo ***//
 	cout << "Qual o nome da imagem?\n";
@@ -117,9 +114,8 @@ int main() {
 
 
 //*** TRATAMENTO DA IMAGEM ***//
-//inicialmente sera nesta parte do codigo que voce vai trabalhar
 
-	if (strcmp(tipo,"P2")==0){
+	if (strcmp(tipo,"P2")==0){ // Para imagens TONS DE CINZA
 		cout << "Oque deseja fazer?\n";
 		cout << "1 - Escurecer\n";
 		cout << "2 - Clarear\n";
@@ -138,11 +134,11 @@ int main() {
 			//*** Escurece a imagem ***//
 			for(i=0;i<altura;i++)
 				for(j=0;j<largura;j++) {
-					valor = (int)imagem[i][j];			//pega o valor do pixel
-					valor -= fator;									//escurece o pixel
-					if (valor < 0)									//se der negativo
-						valor = 0;										//  deixa preto
-					imagem[i][j] = (unsigned char)valor;	//modifica o pixel
+					valor = (int)imagem[i][j];			
+					valor -= fator;									
+					if (valor < 0)									
+						valor = 0;										
+					imagem[i][j] = (unsigned char)valor;
 				}
 		}
 		else if(escolha == 2){
@@ -155,16 +151,16 @@ int main() {
 			espelhar(altura,largura,imagem);
 		}
 		else if(escolha == 5){
-			filtrosobel(altura,largura,imagem);
+			filtrosobel(altura,largura,imagem,imagem_copia_2d);
 		}
 		else if(escolha == 6){
-			filtrogaussiano(altura,largura,imagem);
+			filtrogaussiano(altura,largura,imagem,imagem_copia_2d);
 		}
 		else if(escolha == 7){
-			mascaradenitidez(altura,largura,imagem);
+			mascaradenitidez(altura,largura,imagem,imagem_copia_2d);
 		}
 	}
-	else if (strcmp(tipo,"P3")==0){
+	else if (strcmp(tipo,"P3")==0){ // FUNCOES CASO A IMAGEM FOR COLORIDA;
 		cout << "Oque deseja fazer?\n";
 		cout << "1 - Escurecer\n";
 		cout << "2 - Clarear\n";
@@ -189,13 +185,13 @@ int main() {
 			espelhar(altura,largura, imagem_colorida);
 		}
 		else if(escolha == 5){
-			filtrosobel(altura,largura,imagem_colorida);
+			filtrosobel(altura,largura,imagem_colorida, imagem_copia_3d);
 		}
 		else if(escolha == 6){
-			filtrogaussiano(altura,largura,imagem_colorida);
+			filtrogaussiano(altura,largura,imagem_colorida, imagem_copia_3d);
 		}
 		else if(escolha == 7){
-			mascaradenitidez(altura,largura,imagem_colorida);
+			mascaradenitidez(altura,largura,imagem_colorida, imagem_copia_3d);
 		}
 		else if(escolha == 8){
 			rgbtocinza(altura, largura, imagem_colorida, imagem);

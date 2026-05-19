@@ -1,6 +1,11 @@
-void clarear(int altura, int largura, unsigned char imagem[][500]);
-void negativo(int altura, int largura, unsigned char imagem[][500]);
-void espelhar(int altura, int largura, unsigned char imagem[][500]);
-void filtrosobel(int altura,int largura, unsigned char imagem[][500]);
-void filtrogaussiano(int altura,int largura, unsigned char imagem[][500]);
-void mascaradenitidez(int altura,int largura, unsigned char imagem[][500]);
+
+const int MAXALTURA  = 3000;			
+const int MAXLARGURA = 3000;
+const int DIMENSAO = 3;
+
+void clarear(int altura, int largura, unsigned char imagem[][MAXLARGURA]);
+void negativo(int altura, int largura, unsigned char imagem[][MAXLARGURA]);
+void espelhar(int altura, int largura, unsigned char imagem[][MAXLARGURA]);
+void filtrosobel(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]);
+void filtrogaussiano(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]);
+void mascaradenitidez(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]);

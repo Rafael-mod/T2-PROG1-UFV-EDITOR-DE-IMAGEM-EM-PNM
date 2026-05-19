@@ -1,8 +1,9 @@
 #include <iostream>
 #include <cmath>
+#include "funcoes.h"
 using namespace std;
 
-void clarear(int altura, int largura, unsigned char imagem[][500]){
+void clarear(int altura, int largura, unsigned char imagem[][MAXLARGURA]){
 	int fator, valor;
 	cout << "Qual o fator de clareamento?(1/100)" << endl;
 	cin >> fator;
@@ -18,7 +19,7 @@ void clarear(int altura, int largura, unsigned char imagem[][500]){
 		}
 }
 
-void negativo(int altura, int largura, unsigned char imagem[][500]){
+void negativo(int altura, int largura, unsigned char imagem[][MAXLARGURA]){
 	int valor,negativo; 
 	
 	for(int i=0; i < altura; i++)
@@ -30,7 +31,7 @@ void negativo(int altura, int largura, unsigned char imagem[][500]){
 	
 }
 
-void espelhar(int altura, int largura, unsigned char imagem[][500]){
+void espelhar(int altura, int largura, unsigned char imagem[][MAXLARGURA]){
 	unsigned char aux;
 	
 	for(int i=0; i < altura; i++)
@@ -41,10 +42,9 @@ void espelhar(int altura, int largura, unsigned char imagem[][500]){
 		}
 }
 
-void filtrosobel(int altura,int largura, unsigned char imagem[][500]){
+void filtrosobel(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]){
 	int aux,somax, somay;
 	somax=0, somay=0;
-	unsigned char imagemCopia[altura][largura];
 	int Gx[3][3] = {{1,0,-1},{2,0,-2},{1,0,-1}},
 		Gy[3][3] = {{1,2,1},{0,0,0},{-1,-2,-1}};
 	
@@ -88,9 +88,8 @@ void filtrosobel(int altura,int largura, unsigned char imagem[][500]){
 		}		
 }
 
-void filtrogaussiano(int altura,int largura, unsigned char imagem[][500]){
+void filtrogaussiano(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]){
 	int soma = 0;
-	unsigned char imagemCopia[altura][largura];
 	int matrizG[3][3] = {{1,2,1},{2,4,2},{1,2,1}};
 	
 	// ***CÓPIA DA MATRIZ IMAGEM ***//
@@ -126,11 +125,10 @@ void filtrogaussiano(int altura,int largura, unsigned char imagem[][500]){
 	
 }
 
-void mascaradenitidez(int altura,int largura, unsigned char imagem[][500]){
+void mascaradenitidez(int altura,int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagemCopia[][MAXLARGURA]){
 	float aux,fator;
 	cout << "Qual o fator de nitidez?(0.0 - 5.0)\n";
 	cin >> fator;
-	unsigned char imagemCopia[altura][500];
 		
 	// ***CÓPIA DA MATRIZ IMAGEM ***//
 	for(int i=0; i < altura; i++)
@@ -138,7 +136,7 @@ void mascaradenitidez(int altura,int largura, unsigned char imagem[][500]){
 			imagemCopia[i][j] = imagem[i][j];
 			
 			
-	filtrogaussiano(altura,largura, imagemCopia);
+	filtrogaussiano(altura,largura, imagemCopia, imagem);
 	
 	
 	for(int i =0;i< altura;i++)
