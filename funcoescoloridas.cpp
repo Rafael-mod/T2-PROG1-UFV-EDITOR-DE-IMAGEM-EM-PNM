@@ -202,3 +202,78 @@ void rgbtocinza(int altura, int largura, unsigned char imagem_colorida[][MAXLARG
 	
 	
 }
+
+void pseudocor_raiox(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]){
+	int aux;
+	
+	rgbtocinza(altura,largura, imagem_colorida, imagem);
+	
+	for(int i =0;i< altura;i++)
+		for(int j=0;j<largura;j++){
+				aux = (int) imagem[i][j];
+				
+				if(aux < 15){
+					imagem_colorida[i][j][0] =  aux;
+					imagem_colorida[i][j][1] = aux;
+					imagem_colorida[i][j][2] = aux;
+				}
+				else if(aux <=85){
+					imagem_colorida[i][j][0] = aux*3;
+					imagem_colorida[i][j][1] = 0;
+					imagem_colorida[i][j][2] = 0;
+				}
+				else if(aux <= 170){
+					imagem_colorida[i][j][0] = 255;
+					imagem_colorida[i][j][1] = (aux-85)*3;
+					imagem_colorida[i][j][2] = 0;
+				}
+				else if(aux <= 255){
+					imagem_colorida[i][j][0] =  255;
+					imagem_colorida[i][j][1] = 255;
+					imagem_colorida[i][j][2] = (aux-170)*3;
+				}
+
+		}
+	
+}
+
+void pseudocor_topografia(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]){
+	int aux;
+	
+	rgbtocinza(altura,largura, imagem_colorida, imagem);
+	
+	for(int i =0;i< altura;i++)
+		for(int j=0;j<largura;j++){
+				aux = (int) imagem[i][j];
+				
+				if(aux <= 30){
+					imagem_colorida[i][j][0] =  20 + aux;
+					imagem_colorida[i][j][1] = 70 + (aux * 2.0);
+					imagem_colorida[i][j][2] = 140 + (aux * 2.0);
+				}
+				else if(aux <= 70){
+					imagem_colorida[i][j][0] = 50 + ((aux - 30) * 1.5);
+					imagem_colorida[i][j][1] =140 + ((aux - 30) * 1.0);
+					imagem_colorida[i][j][2] = 60;
+				}
+				else if(aux <= 140){
+					imagem_colorida[i][j][0] =110 + ((aux - 70) * 1.3);
+					imagem_colorida[i][j][1] = 180 + ((aux - 70) * 0.1);
+					imagem_colorida[i][j][2] = 60 + ((aux - 70) * 0.4);
+				}
+				else if(aux <= 210){
+					imagem_colorida[i][j][0] =  201 - ((aux - 140) * 0.7);
+					imagem_colorida[i][j][1] = 187 - ((aux - 140) * 1.2);
+					imagem_colorida[i][j][2] = 88 - ((aux - 140) * 0.6);
+				}
+				else if(aux <= 255){
+					imagem_colorida[i][j][0] = 152 - ((aux - 210) * 1.2);
+					imagem_colorida[i][j][1] = 103 - ((aux - 210) * 1.1);
+					imagem_colorida[i][j][2] = 46 - ((aux - 210) * 0.5);
+						
+				}
+
+		}
+	
+}
+

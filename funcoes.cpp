@@ -152,3 +152,6 @@ void mascaradenitidez(int altura,int largura, unsigned char imagem[][MAXLARGURA]
 		}
 }
 
+
+
+

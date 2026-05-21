@@ -170,6 +170,8 @@ int main() {
 		cout << "6 - Desfocagem Gaussiana\n";
 		cout << "7 - Mascara de nitidez\n";
 		cout << "8 - Colorida para tons de cinza\n";
+		cout << "9 - Pseudo-cores para raio-x\n";
+		cout << "10 - Pseudo-cores para topografia\n";
 		cin >> escolha;
 		
 		if(escolha == 1){
@@ -196,6 +198,12 @@ int main() {
 		else if(escolha == 8){
 			rgbtocinza(altura, largura, imagem_colorida, imagem);
 			strcpy(tipo, "P2");
+		}
+		else if(escolha == 9){
+			pseudocor_raiox(altura,largura,imagem,imagem_colorida);
+		}
+		else if(escolha == 10){
+			pseudocor_topografia(altura,largura,imagem,imagem_colorida);
 		}
 	}
     //*************************//

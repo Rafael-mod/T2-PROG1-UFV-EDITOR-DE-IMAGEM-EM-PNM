@@ -7,3 +7,5 @@ void filtrosobel(int altura,int largura, unsigned char imagem_colorida[][MAXLARG
 void filtrogaussiano(int altura,int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagemCopia[][MAXLARGURA][DIMENSAO]);
 void mascaradenitidez(int altura,int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagemCopia[][MAXLARGURA][DIMENSAO]);
 void rgbtocinza(int altura, int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagem[][MAXLARGURA]);
+void pseudocor_raiox(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
+void pseudocor_topografia(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
