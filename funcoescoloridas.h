@@ -3,9 +3,11 @@ void escurecer(int altura,int largura, unsigned char imagem_colorida[][MAXLARGUR
 void negativo(int altura, int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
 void clarear(int altura, int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
 void espelhar(int altura, int largura,  unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
+
 void filtrosobel(int altura,int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagemCopia[][MAXLARGURA][DIMENSAO]);
 void filtrogaussiano(int altura,int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagemCopia[][MAXLARGURA][DIMENSAO]);
 void mascaradenitidez(int altura,int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagemCopia[][MAXLARGURA][DIMENSAO]);
+
 void rgbtocinza(int altura, int largura, unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO], unsigned char imagem[][MAXLARGURA]);
 void pseudocor_raiox(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
 void pseudocor_topografia(int altura, int largura, unsigned char imagem[][MAXLARGURA], unsigned char imagem_colorida[][MAXLARGURA][DIMENSAO]);
